@@ -23,11 +23,9 @@
       <% end %>
     </div>
     <div class="info show_booking col-4">
-      <p style="font-size: 16px;"><span class="font-weight-bold">À partir de: </span><%= @booking.start_date.strftime("%e-%m-%Y")  %></p>
-      <p style="font-size: 16px;"><span class="font-weight-bold">jusqu'a: </span><%= @booking.end_date.strftime("%e-%m-%Y")  %></p>
       <p style="font-size: 16px;"><span class="font-weight-bold">Addresse: </span><%= product.address  %></p>
       <p style="font-size: 16px;"><span class="font-weight-bold">Description: </span><%= product.description  %></p>
-      <p style="font-size: 16px;"><span class="font-weight-bold">Nombre de piéces: </span><%= product.capacity  %></p>
+      <p style="font-size: 16px;"><span class="font-weight-bold">Nombre de piéces: </span><%= product.stock  %></p>
       <p style="font-size: 16px;"><span class="font-weight-bold">Ville: </span><%= product.city  %></p>
       <p style="font-size: 16px;"><span class="font-weight-bold">Total Price: </span><%= @booking.total_price  %> Euros.</p>
     </div>

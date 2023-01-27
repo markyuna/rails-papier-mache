@@ -12,10 +12,10 @@
         <%= form_with url: products_path, method: :get, class: "d-flex" do %>
         <%= text_field_tag :query,
           params[:query],
-          class: "form-control",
+          class: "form-control rounded-pill col-6 me-3",
           placeholder: "Trouver une sculpture"
         %>
-        <%= submit_tag "Search", class: "btn btn-outline-primary rounded-pill" %>
+        <%= submit_tag "Search", class: "btn btn-outline-primary rounded-pill col-4" %>
         <% end %>
 
           <%# <form class="d-flex" role="search">
