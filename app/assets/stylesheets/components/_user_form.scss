@@ -1,0 +1,11 @@
+.btn-primary {
+  background-color: rgb(38, 38, 215);
+  border-color: orangered;
+  border-radius: 5px;
+  margin: 12px 0 12px 0;
+}
+
+.btn-primary:hover {
+  background-color: $gray;
+  border-color: $gray;
+}

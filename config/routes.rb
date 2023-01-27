@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   get '/bookings/:id/accept', to: 'bookings#accept', as: 'accept_booking'
   get '/bookings/:id/reject', to: 'bookings#reject', as: 'reject_booking'
 
-
   resources :products do
     resources :bookings, only: %i[new create destroy]
 
@@ -20,15 +19,14 @@ Rails.application.routes.draw do
       get :reviews
     end
 
-    resources :bookings, only: [ :new, :create, :destroy ]
+    resources :bookings, only: %i[new create destroy]
   end
 
-  resources :bookings, except: [ :new, :index, :create ] do
-    resources :reviews, only: [ :new, :create ]
-
+  resources :bookings, except: %i[new index create] do
+    resources :reviews, only: %i[new create]
   end
 
-  resources :reviews, except: [ :new, :create ]
+  resources :reviews, except: %i[new create]
 
   get '/bookings', to: 'bookings#index'
 

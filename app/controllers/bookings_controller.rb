@@ -5,7 +5,6 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: %i[show edit update destroy]
   before_action :set_product, only: %i[new create destroy]
 
-
   def accept
     @booking = Booking.find(params[:id])
     authorize @booking, :accept?
@@ -28,6 +27,9 @@ class BookingsController < ApplicationController
   def index
     #@bookings = Booking.all
     @bookings = policy_scope(Booking)
+    @my_bookings = policy_scope(Booking)
+    @my_bookings = Booking.where(user_id: current_user.id)
+    @my_products_booked = current_user.products.map(&:bookings).flatten
     @bookings = current_user.products.map(&:bookings).flatten.select { |b| b.status == "pending" }
   end
 
@@ -89,6 +91,7 @@ class BookingsController < ApplicationController
   def set_user
     @user = current_user
   end
+
 
   def booking_params
     params.require(:booking).permit(:start_date, :end_date, :status, :total_price)

@@ -1,2 +1,28 @@
 // Import page-specific CSS files here.
+@import "products";
+@import "reviews";
+@import "my_bookings";
+@import "_new";
+@import "show_product";
+@import "my_products";
 @import "home";
+
+.products-photo {
+  margin-bottom: 16px;
+}
+
+.card-img-top.my_product_image {
+  width: 100%;
+  max-width: initial;
+}
+
+
+.card-block.p-3 {
+  p {
+    font-size: 16px;
+  }
+}
+
+.card.mb-2 {
+  border-radius: 16px;
+}
