@@ -1,5 +1,5 @@
-<div class="navbar navbar-expand-lg navbar-light bg-light">
-  <nav class="container-fluid d-flex justify-content-space-between">
+<nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+ <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -16,26 +16,26 @@
           </div>
          </nav>
       </div>
-  </nav>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav me-auto">
-      <% if user_signed_in? %>
-      <li class="nav-item dropdown sign-up">
-        <img class="avatar dropdown-toggle sign-in" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="/assets/sign_in.png" />
-        <%# <img class="overlay" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="/assets/sign_up.png" /> %>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto">
+        <% if user_signed_in? %>
+        <li class="nav-item dropdown">
+          <img class="avatar dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="/assets/sign_in.png" />
+          <%# <img class="overlay" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="/assets/sign_up.png" /> %>
 
-        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Profil - <%= current_user.email %></a>
-          <a class="dropdown-item" href="<%= my_products_path %>">Mes produits</a>
-          <a class="dropdown-item" href="<%= new_product_path %>">Ajouter un produit</a>
-          <a class="dropdown-item" href="<%= bookings_path %>">Mes réservations</a>
-          <a class="dropdown-item" data-turbo-method="delete" href="<%= destroy_user_session_path %>">Se déconnecter</a>
-        </div>
-        <% else %>
-        <li><%= link_to "S'enregistrer", new_user_registration_path, class: 'btn btn-outline-primary rounded-pill' %></li>
-        <%= link_to "Se connecter", new_user_session_path, class: 'btn btn-outline-primary rounded-pill' %>
-        <% end %>
-      </li>
-    </ul>
+          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Profil - <%= current_user.email %></a>
+            <a class="dropdown-item" href="<%= my_products_path %>">Mes produits</a>
+            <a class="dropdown-item" href="<%= new_product_path %>">Ajouter un produit</a>
+            <a class="dropdown-item" href="<%= bookings_path %>">Mes réservations</a>
+            <a class="dropdown-item" data-turbo-method="delete" href="<%= destroy_user_session_path %>">Se déconnecter</a>
+          </div>
+          <% else %>
+          <li><%= link_to "S'enregistrer", new_user_registration_path, class: 'btn btn-outline-primary rounded-pill' %></li>
+          <%= link_to "Se connecter", new_user_session_path, class: 'btn btn-outline-primary rounded-pill' %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
   </div>
-</div>
+</nav>

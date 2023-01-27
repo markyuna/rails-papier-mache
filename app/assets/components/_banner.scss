@@ -1,0 +1,40 @@
+.banner {
+  
+  background-color: rgba(0, 0, 0, 0.5);
+  background-blend-mode:color;
+  color: rgb(255, 255, 255);
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner h1 {
+  font-size: 120px;
+  font-family: helvetica;
+  font-weight: bolder;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+  color: #D8DDF8;
+}
+
+.banner p {
+  font-size: 24px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+  margin-bottom: 40px;
+}
+
+.banner-button {
+  color: black;
+  background-color:#D8DDF8;
+  padding: 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  margin-top: 20px;
+}
+
+.banner-button:hover {
+  color: #D8DDF8;
+  background-color: black;
+  font-weight: bolder;
+  ;
+}

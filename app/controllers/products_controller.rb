@@ -2,17 +2,39 @@ class ProductsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show]
 
   before_action :set_user, :database_search
-  before_action :set_product, only: %i[show edit update destroy reviews]
+  before_action :set_booking, only: %i[show edit update destroy]
+  before_action :set_product, only: %i[new create destroy]
+
+  def accept
+    @booking = Booking.find(params[:id])
+    authorize @booking, :accept?
+    @booking.update(status: "accepted")
+    if @booking.product.update(status: true)
+    redirect_to my_products_path, notice: "Réservation acceptée"
+    else
+      render :new
+    end
+  end
+
+  def reject
+    @booking = Booking.find(params[:id])
+    authorize @booking, :reject?
+    @booking.update(status: "rejected")
+    @booking.product.update(status: false)
+    redirect_to my_products_path, notice: "Réservation refusée"
+  end
 
   def index
     #@products = Product.all
-    #@products = policy_scope(Product)
+    @my_bookings = policy_scope(Booking)
+    @my_bookings = Booking.where(user_id: current_user.id)
+    @my_products_booked = current_user.products.map(&:bookings).flatten
     @markers = @products.geocoded.map do |product|
       {
         lng: product.longitude,
         lat: product.latitude,
-        info_window_html: render_to_string(partial: "info_window", locals: {product: product}),
-        marker_html: render_to_string(partial: "marker", locals: {product: product})
+        info_window_html: render_to_string(partial: "info_window", locals: { product: product }),
+        marker_html: render_to_string(partial: "marker", locals: { product: product })
       }
     end
   end
@@ -22,20 +44,6 @@ class ProductsController < ApplicationController
     authorize @product
   end
 
-  def create
-    @product = Product.new(product_params)
-    @product.user_id = @user.id
-    @product = current_user.products.build(product_params)
-    authorize @product
-    if @product.save
-     flash[:notice] = "Product successfully listed for sale!"
-     redirect_to @product
-    else
-     flash[:alert] = "Failed to list product for sale. Please try again."
-     render :new
-    end
-  end
-
   def show
     @product = Product.find(params[:id])
     @booking = Booking.new
@@ -43,8 +51,21 @@ class ProductsController < ApplicationController
     authorize @product
   end
 
+  def create
+    @product = Product.new(product_params)
+    @product.user_id = @user.id
+    @product = current_user.products.build(product_params)
+    authorize @product
+    if @product.save
+      flash[:notice] = "Product successfully listed for sale!"
+      redirect_to @product
+    else
+      flash[:alert] = "Failed to list product for sale. Please try again."
+      render :new
+    end
+  end
+
   def edit
-    Product.find(params[:id])
     authorize @product
   end
 
@@ -71,7 +92,7 @@ class ProductsController < ApplicationController
 
   def my_products
     @products = current_user.products
-    @bookings = @products.map {|p| p.bookings}.flatten
+    @bookings = @products.map {&:bookings}.flatten
     authorize @products
   end
 
@@ -110,14 +131,14 @@ class ProductsController < ApplicationController
     @bookings = Booking.where(user: current_user)
   end
 
-  def my_bookings_as_owner
-    @bookings = Booking.where(product: current_user.products)
-  end
+  # def my_bookings_as_owner
+  #   @bookings = Booking.where(product: current_user.products)
+  # end
 
   private
 
   def product_params
-    params.require(:product).permit(:title, :description, :address, :city, :photo, :capacity, :price, :latitude, :longitude, :start_date, :end_date, :status)
+    params.require(:product).permit(:title, :description, :address, :city, :photo, :stock, :price, :latitude, :longitude, :status)
   end
 
   def set_product

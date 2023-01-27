@@ -1,13 +1,9 @@
-class ProductPolicy < ApplicationPolicy
+class BookingPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.all
+      scope.where(user_id: @user.id)
     end
   end
-
-  # def new?
-  #   true
-  # end
 
   def create?
     true
@@ -29,21 +25,17 @@ class ProductPolicy < ApplicationPolicy
     true
   end
 
-  def my_products?
+  def accept?
     true
   end
 
-  def search?
-    true
-  end
-
-  def reviews?
+  def reject?
     true
   end
 
   private
 
   # def user_is_owner_or_admin?
-  #   user == record.user || user.admin
+  #   user == User.find(record.user_id) || user.admin
   # end
 end

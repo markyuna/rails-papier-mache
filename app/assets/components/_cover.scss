@@ -1,0 +1,15 @@
+.cover {
+  background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(asset_path('banner.jpg'));
+  height: 250px;
+  background-size: cover;
+  background-position: center;
+
+}
+
+.typed-js {
+  min-height: 33.6px;
+}
+
+.text-banner {
+  margin-top: 120px;
+}
