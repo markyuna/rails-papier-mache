@@ -1,18 +1,19 @@
 <div class="cover mb-4 d-flex align-items-center justify-content-center">
-  <div class="text-center text-white">
+  <div class="text-white">
    <h2 class="display-1 pt-5">Ensembles À Louer</h2>
+  </div>
+</div>
 
-
-<div class="card border-primary mb-3" style="max-width: 940px;">
-  <div class="row g-0">
-    <div class="col-md-4">
+<div class="container">
+  <div class="product-data d-flex">
+    <div class="d-flex justify-content-between">
       <% if @product.photo.attached? %>
-              <%= cl_image_tag @product.photo.key, class: 'img-fluid rounded-start' %>
+              <%= cl_image_tag @product.photo.key, class: 'show-image rounded-start' %>
           <% else %>
             <%= image_tag("unknown.jpg", class:"show-image") %>
           <% end %>
     </div>
-    <div class="col-md-8">
+    <div class="product_show_info">
       <div class="card-body">
         <h1><%= @product.title %></h1>
         <p class="card-text">
@@ -60,7 +61,7 @@
           <% else %>
             <p class="card-text"><strong>Indisponible</strong></p><br>
           <% end %>
-          <%= link_to "Louer", "/products/#{params[:id]}/bookings/new", class: "btn btn-primary" %>
+          <%= link_to "Louer", "/products/#{params[:id]}/bookings/new", class: "btn btn-info" %>
         </p>
       </div>
     </div>
@@ -70,15 +71,15 @@
 
     <div class="d-flex flex-row product-options">
       <% if policy(Product).create? %>
-        <%= link_to "Ajouter produits", new_product_path, class: "btn btn-primary h-25" %>
+        <%= link_to "Ajouter produits", new_product_path, class: "btn btn-outline-info" %>
       <% end %>
       <% if policy(@product).edit? %>
-        <%= link_to 'Modifier', edit_product_path(@product), class:"btn btn-primary" %>
+        <%= link_to 'Modifier', edit_product_path(@product), class:"btn btn-outline-info" %>
       <% end %>
       <% if policy(@product).destroy? %>
-        <%= link_to 'Suprimer', @product, method: :delete, class:"btn btn-primary", data: {confirm: "sure?"} %>
+        <%= link_to 'Suprimer', @product, method: :delete, class:"btn btn-outline-info", data: {confirm: "sure?"} %>
       <% end %>
       <% if policy(Product).create? %>
-        <%= link_to "Retour à Tous les produits", products_path, class: "btn btn-primary"  %>
+        <%= link_to "Retour à Tous les produits", products_path, class: "btn btn-outline-info"  %>
       <% end %>
     </div>

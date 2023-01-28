@@ -17,15 +17,16 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @review = Review.new(review_params)
-    @review.booking_id = @booking.id
-    authorize @review
-    @review.save
-    if @review.save
-      redirect_to review_path(@review)
-    else
-      render :new
-    end
+    @product = Product.find()
+    # @review = Review.new(review_params)
+    # @review.booking_id = @booking.id
+    # authorize @review
+    # @review.save
+    # if @review.save
+    #   redirect_to review_path(@review)
+    # else
+    #   render :new
+    # end
   end
 
   def show
