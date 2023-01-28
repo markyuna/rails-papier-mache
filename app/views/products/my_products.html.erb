@@ -38,14 +38,14 @@
 </table>
 
 <div class="card m-5 p-5" style="width: 18rem;">
-  <div class="card-body">
+  <div class="card-body ">
     <% unless current_user.products.nil? %>
       <% @products.each do |product| %>
         <div class="product_row">
           <div class="card m-5 p-5">
-            <h5 class="card-title"><%= product.title %></h5>
-            <div class="card-img-top photo">
+            <div class="card-img-top">
               <% if product.photo.key.present? %>
+                <h5 class="card-title"><%= product.title %></h5>
                   <%= cl_image_tag(product.photo.key, class:"my-product-image") %>
                 <% else %>
                   <%= image_tag("unknown.jpg", class:"my-product-image") %>
