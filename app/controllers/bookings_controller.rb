@@ -3,7 +3,7 @@ class BookingsController < ApplicationController
 
   before_action :set_user
   before_action :set_booking, only: %i[show edit update destroy]
-  before_action :set_product, only: %i[new create destroy]
+  before_action :set_product, only: %i[new create]
 
   def accept
     @booking = Booking.find(params[:id])
@@ -30,7 +30,7 @@ class BookingsController < ApplicationController
     @my_bookings = policy_scope(Booking)
     @my_bookings = Booking.where(user_id: current_user.id)
     @my_products_booked = current_user.products.map(&:bookings).flatten
-    @bookings = current_user.products.map(&:bookings).flatten.select { |b| b.status == "pending" }
+    #@bookings = current_user.products.map(&:bookings).flatten.select { |b| b.status == "pending" }
   end
 
   def new
@@ -46,7 +46,8 @@ class BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
     @booking.user_id = @user.id
     @booking.product_id = @product.id
-    @booking.total_price = ((@booking.end_date - @booking.start_date).to_i) * @product.price
+    @booking.total_price = total_price(@booking, @product)
+  # @booking.total_price = ((@booking.end_date - @booking.start_date).to_i) * @product.price
     authorize @booking
     if @booking.save
       redirect_to booking_path(@booking)
@@ -63,7 +64,9 @@ class BookingsController < ApplicationController
     new_id = @booking.product_id
     @product = Product.find(new_id)
     @booking.update(booking_params)
-    @booking.total_price = ((@booking.end_date - @booking.start_date).to_i) * @product.price
+    @booking.total_price = total_price(@booking, @product)
+
+   # @booking.total_price = ((@booking.end_date - @booking.start_date).to_i) * @product.price
     authorize @booking
     if @booking.save
       redirect_to booking_path(@product, @booking)
@@ -73,12 +76,17 @@ class BookingsController < ApplicationController
   end
 
   def destroy
+    @booking = Booking.find(params[:id])
     authorize @booking
     @booking.destroy
     redirect_to bookings_path
   end
 
   private
+
+  def total_price (booking, product)
+    (((@booking.end_date - @booking.start_date).to_i) * @product.price)/7
+  end
 
   def set_product
     @product = Product.find(params[:product_id])
@@ -94,6 +102,6 @@ class BookingsController < ApplicationController
 
 
   def booking_params
-    params.require(:booking).permit(:start_date, :end_date)
+    params.require(:booking).permit(:start_date, :end_date, :status, :total_price)
   end
 end

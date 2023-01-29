@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get '/bookings/:id/reject', to: 'bookings#reject', as: 'reject_booking'
 
   resources :products do
-    resources :bookings, only: %i[new create destroy]
+    resources :bookings, only: %i[new create]
 
     collection do
       get :search
@@ -19,7 +19,7 @@ Rails.application.routes.draw do
       get :reviews
     end
 
-    resources :bookings, only: %i[new create destroy]
+    resources :bookings, only: %i[new index create destroy]
   end
 
   resources :bookings, except: %i[new index create] do
@@ -31,4 +31,6 @@ Rails.application.routes.draw do
   get '/bookings', to: 'bookings#index'
 
   get '/error', to: 'errors#not_found'
+
+  get "*path", to: redirect("/error")
 end

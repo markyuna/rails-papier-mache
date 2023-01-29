@@ -9,6 +9,7 @@
   <%= simple_form_for [ @booking ] do |f| %>
   <%= f.input :start_date %>
   <%= f.input :end_date %>
+  <%= f.input :status %>
   <%= f.submit "Mettre à jour", class: "btn btn-outline-primary" %>
 <% end %>
 </div>
