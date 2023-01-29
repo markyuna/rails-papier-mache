@@ -5,15 +5,15 @@
 </div>
 
 <div class="container">
-  <div class="product-data d-flex">
-    <div class="d-flex justify-content-between">
+  <div class="card">
+    <div class="col-12 col-lg-6">
       <% if @product.photo.attached? %>
-              <%= cl_image_tag @product.photo.key, class: 'show-image rounded-start' %>
+              <%= cl_image_tag @product.photo.key, class: 'show-image' %>
           <% else %>
             <%= image_tag("unknown.jpg", class:"show-image") %>
           <% end %>
     </div>
-    <div class="product_show_info">
+    <div class="col-12 col-lg-6">
       <div class="card-body">
         <h1><%= @product.title %></h1>
         <p class="card-text">
