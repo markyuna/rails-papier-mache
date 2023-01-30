@@ -37,6 +37,7 @@ class ProductsController < ApplicationController
   end
 
   def show
+    authorize @product
     @product = Product.find(params[:id])
     @booking = Booking.new
     @bookings = @product.bookings.where(status: "pending")
@@ -48,6 +49,7 @@ class ProductsController < ApplicationController
   end
 
   def update
+    authorize @product
     @product.update(product_params)
     @booking = @product.bookings.find(params[:booking_id])
     if params[:status] == false
@@ -64,8 +66,8 @@ class ProductsController < ApplicationController
 
   def destroy
     @product.destroy
-    redirect_to my_products_path
-    authorize @products
+    authorize @product
+    redirect_to products_path
   end
 
   def my_products

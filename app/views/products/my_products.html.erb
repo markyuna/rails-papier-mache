@@ -39,39 +39,44 @@
 
 <div class="card m-5 p-5" style="width: 18rem;">
   <div class="card-body ">
-    <% unless current_user.products.nil? %>
+   <% unless current_user.products.nil? %>
       <% @products.each do |product| %>
         <div class="product_row">
-          <div class="card m-5 p-5">
-            <div class="card-img-top">
-              <% if product.photo.key.present? %>
-                <h5 class="card-title"><%= product.title %></h5>
-                  <%= cl_image_tag(product.photo.key, class:"my-product-image") %>
-                <% else %>
-                  <%= image_tag("unknown.jpg", class:"my-product-image") %>
-              <% end %>
-                <p class="card-text"><%= product.address %></p>
-                <p class="card-text"><%= product.description %></p>
+          <div class="photo">
+            <% if product.photo.key.present? %>
+              <%= cl_image_tag(product.photo.key, class:"my-product-image") %>
+            <% else %>
+              <%= image_tag("unknown.jpg", class:"my-product-image") %>
+            <% end %>
+            <p><%= product.address %></p>
+          </div>
 
-              <% if policy(product).edit? %>
-                  <%= link_to 'Edit', edit_product_path(product), class:"btn btn-primary" %>
-                <% end %>
-                  <% unless product.bookings.any? %>
-                    <div class="remove_product_button">
-                      <%= link_to product_path(product), method:"delete", data: { confirm: "Êtes-vous sûr?" }, class:"bin" do %>
-                      <i class="fa fa-trash" aria-hidden="true"></i>
-                    </div>
-                  <% end %>
-                <% else %>
-                  <div class="d-flex align-items-center">
-                    <%= link_to "Ajouter un nouveau produit", new_product_path(@product), class:"btn btn-primary add_new_product" %>
-                    <%= link_to 'Back to product', products_path, class: "btn btn-primary" %>
-                  </div>
-              <% end %>
+          <div class="d-flex align-items-center">
+            <% if policy(product).edit? %>
+              <%= link_to 'Edit', edit_product_path(product), class:"btn btn-primary" %>
+            <% end %>
+            <% unless product.bookings.any? %>
+              <div class="remove_product_button">
+
+                <%= link_to product_path(product), method:"delete", data: { confirm: "Êtes-vous sûr?" }, class:"bin" do %>
+                <i class="fa fa-trash" aria-hidden="true"></i>
+
+              </div>
+            <% end %>
+          </div>
+          <% else %>
+            <div class="remove_product_button_disabled">
+              <i class="fa fa-trash" aria-hidden="true" title="Ce produit a une réservation en cours"></i>
             </div>
+          <% end %>
+
+          <hr>
+          <% end %>
+          <div class="d-flex align-items-center">
+            <%= link_to "Ajouter un nouveau produit", new_product_path(@product), class:"btn btn-primary add_new_product" %>
+            <%= link_to 'Back to product', products_path, class: "btn btn-primary" %>
           </div>
         </div>
-      <% end %>
     <% end %>
   </div>
 </div>

@@ -69,17 +69,17 @@
 </div>
       <hr>
 
-    <div class="d-flex flex-row product-options">
-      <% if policy(Product).create? %>
-        <%= link_to "Ajouter produits", new_product_path, class: "btn btn-outline-info" %>
-      <% end %>
-      <% if policy(@product).edit? %>
-        <%= link_to 'Modifier', edit_product_path(@product), class:"btn btn-outline-info" %>
-      <% end %>
-      <% if policy(@product).destroy? %>
-        <%= link_to 'Suprimer', @product, method: :delete, class:"btn btn-outline-info", data: {confirm: "sure?"} %>
-      <% end %>
-      <% if policy(Product).create? %>
-        <%= link_to "Retour à Tous les produits", products_path, class: "btn btn-outline-info"  %>
-      <% end %>
-    </div>
+<div class="d-flex flex-row product-options">
+  <% if policy(Product).create? %>
+    <%= link_to "Ajouter produits", new_product_path, class: "btn btn-outline-info" %>
+  <% end %>
+  <% if policy(@product).edit? %>
+    <%= link_to 'Modifier', edit_product_path(@product), class:"btn btn-outline-info" %>
+  <% end %>
+  <% if policy(@product).destroy? %>
+    <%= link_to 'Suprimer', @product, method: :delete, class:"btn btn-outline-info" %>
+  <% end %>
+  <% if policy(Product).create? %>
+    <%= link_to "Retour à Tous les produits", products_path, class: "btn btn-outline-info"  %>
+  <% end %>
+</div>
