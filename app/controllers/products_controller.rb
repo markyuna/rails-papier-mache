@@ -37,7 +37,7 @@ class ProductsController < ApplicationController
   end
 
   def show
-    authorize @product
+    @products = policy_scope(Product)
     @product = Product.find(params[:id])
     @booking = Booking.new
     @bookings = @product.bookings.where(status: "pending")
@@ -49,7 +49,6 @@ class ProductsController < ApplicationController
   end
 
   def update
-    authorize @product
     @product.update(product_params)
     @booking = @product.bookings.find(params[:booking_id])
     if params[:status] == false
@@ -66,8 +65,8 @@ class ProductsController < ApplicationController
 
   def destroy
     @product.destroy
-    authorize @product
-    redirect_to products_path
+    redirect_to my_products_path
+    authorize @products
   end
 
   def my_products
@@ -118,7 +117,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:title, :description, :address, :city, :photo, :stock, :price, :latitude, :longitude, :start_date, :end_date, :status)
+    params.require(:product).permit(:title, :description, :address, :city, :photo, :capacity, :price, :latitude, :longitude, :start_date, :end_date, :status)
   end
 
   def set_product

@@ -30,47 +30,7 @@
       <p style="font-size: 16px;"><span class="font-weight-bold">Total Price: </span><%= @booking.total_price  %> € </p>
     </div>
     <div class="col-4 d-flex justify-content-start">
-      <div>
-        <% if @booking.review %>
-        <h3>Votre opinion</h3>
-          <div class="card mb-2">
-            <div class="card-block p-3">
-              <h4 class="py-4"><%= product.address %></h4>
-              <div class="my-1">
-                <% if @booking.review.rating == 5 %>
-                  <div class="d-flex">
-                    <i class="fas fa-star" style="color: gold"></i><i class="fas fa-star" style="color: gold"></i><i class="fas fa-star" style="color: gold"></i><i class="fas fa-star" style="color: gold"></i><i class="fas fa-star" style="color: gold"></i>
-                  </div>
-                <% elsif @booking.review.rating == 4 %>
-                  <div class="d-flex">
-                    <i class="fas fa-star" style="color: gold"></i><i class="fas fa-star" style="color: gold"></i><i class="fas fa-star" style="color: gold"></i><i class="fas fa-star" style="color: gold"></i><i class="fas fa-star" style="color: grey"></i>
-                  </div>
-                <% elsif @booking.review.rating == 3 %>
-                  <div class="d-flex">
-                    <i class="fas fa-star" style="color: gold"></i><i class="fas fa-star" style="color: gold"></i><i class="fas fa-star" style="color: gold"></i><i class="fas fa-star" style="color: grey"></i><i class="fas fa-star" style="color: grey"></i>
-                  </div>
-                <% elsif @booking.review.rating == 2 %>
-                  <div class="d-flex">
-                    <i class="fas fa-star" style="color: gold"></i><i class="fas fa-star" style="color: gold"></i><i class="fas fa-star" style="color: grey"></i><i class="fas fa-star" style="color: grey"></i><i class="fas fa-star" style="color: grey"></i>
-                  </div>
-                <% elsif @booking.review.rating == 1 %>
-                  <div class="d-flex">
-                    <i class="fas fa-star" style="color: gold"></i><i class="fas fa-star" style="color: grey"></i><i class="fas fa-star" style="color: grey"></i><i class="fas fa-star" style="color: grey"></i><i class="fas fa-star" style="color: grey"></i>
-                  </div>
-                <% else %>
-                  <div class="d-flex">
-                    <i class="fas fa-star" style="color: grey"></i><i class="fas fa-star" style="color: grey"></i><i class="fas fa-star" style="color: grey"></i><i class="fas fa-star" style="color: grey"></i><i class="fas fa-star" style="color: grey"></i>
-                  </div>
-                <% end %>
-              </div>
-              <p><%= @booking.review.content %></p>
-              <%= link_to "Votre avis", review_path(@booking.review), class: "btn btn-outline-dark" %>
-            </div>
-          </div>
-        <% else %>
-          <%= link_to 'Ajouter un commentaire', new_booking_review_path(@booking), class: "btn btn-primary mx-2" %>
-        <% end %>
-      </div>
+    
     </div>
   </div>
   <div class="booking-options">

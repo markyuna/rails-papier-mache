@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get '/bookings/:id/reject', to: 'bookings#reject', as: 'reject_booking'
 
   resources :products do
-    resources :bookings, only: %i[new create]
+    resources :bookings, only: %i[new create destroy]
 
     collection do
       get :search
