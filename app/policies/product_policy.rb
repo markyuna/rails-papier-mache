@@ -18,7 +18,7 @@ class ProductPolicy < ApplicationPolicy
   end
 
   def edit?
-    user == record.user
+    true
   end
 
   def update?

@@ -7,39 +7,7 @@
 <div class="my_products_page">
   <div class="my_products_container">
 
-    <table>
-  <thead>
-    <tr>
-      <th>Renter</th>
-      <th>Dates</th>
-      <th>Produit</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @bookings.each do |booking| %>
-      <tr>
-        <td><%= booking.user_id %></td>
-        <td><%= booking.start_date %> to <%= booking.end_date %></td>
-        <td><%= booking.product.title %></td>
-        <td>
-          <% if booking.status == "pending" %>
-          <%= link_to "Accept", accept_booking_path(booking), method: :get, class: "btn btn-success" %>
-          <%= link_to "Reject", reject_booking_path(booking), method: :get, class: "btn btn-danger" %>
-          <% else %>
-            <% if booking.update(status: "accepted") %>
-              <%= booking.destroy %>
-            <% end %>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<div class="card m-5 p-5" style="width: 18rem;">
-  <div class="card-body ">
-   <% unless current_user.products.nil? %>
+    <% unless current_user.products.nil? %>
       <% @products.each do |product| %>
         <div class="product_row">
           <div class="photo">
@@ -55,31 +23,33 @@
             <% if policy(product).edit? %>
               <%= link_to 'Edit', edit_product_path(product), class:"btn btn-primary" %>
             <% end %>
-            <% unless product.bookings.any? %>
-              <div class="remove_product_button">
+                      <% unless product.bookings.any? %>
+          <div class="remove_product_button">
 
-                <%= link_to product_path(product), method:"delete", data: { confirm: "Êtes-vous sûr?" }, class:"bin" do %>
-                <i class="fa fa-trash" aria-hidden="true"></i>
+            <%= link_to product_path(product), method:"delete", data: { confirm: "Are you sure?" }, class:"bin" do %>
+            <i class="fa fa-trash" aria-hidden="true"></i>
 
-              </div>
             <% end %>
           </div>
-          <% else %>
-            <div class="remove_product_button_disabled">
-              <i class="fa fa-trash" aria-hidden="true" title="Ce produit a une réservation en cours"></i>
-            </div>
-          <% end %>
+          </div>
 
-          <hr>
+
+          <% else %>
+          <div class="remove_product_button_disabled">
+            <i class="fa fa-trash" aria-hidden="true" title="This product has ongoing booking"></i>
+          </div>
           <% end %>
-          <div class="d-flex align-items-center">
-            <%= link_to "Ajouter un nouveau produit", new_product_path(@product), class:"btn btn-primary add_new_product" %>
-            <%= link_to 'Back to product', products_path, class: "btn btn-primary" %>
           </div>
         </div>
+
+
+
+        </div>
+        <hr>
+      <% end %>
     <% end %>
+    <div class="d-flex align-items-center">
+    <%= link_to "Add a new product", new_product_path(@product), class:"btn btn-primary add_new_product" %>
+    </div>
   </div>
 </div>
-
-<hr>
-

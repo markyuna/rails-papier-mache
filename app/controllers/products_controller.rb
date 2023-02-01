@@ -37,7 +37,6 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @products = policy_scope(Product)
     @product = Product.find(params[:id])
     @booking = Booking.new
     @bookings = @product.bookings.where(status: "pending")
@@ -65,7 +64,7 @@ class ProductsController < ApplicationController
 
   def destroy
     @product.destroy
-    redirect_to my_products_path
+    redirect_to my_products_path, status: :see_other
     authorize @products
   end
 

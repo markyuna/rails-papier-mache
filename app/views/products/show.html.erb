@@ -5,7 +5,7 @@
 </div>
 
 <div class="">
-  
+
   <% if @product.photo.attached? %>
     <%= cl_image_tag @product.photo.key, class: 'show-image' %>
     <% else %>
@@ -73,3 +73,17 @@
   </div>
 </div>
 <hr>
+<div class="d-flex flex-row product-options">
+      <% if policy(Product).create? %>
+        <%= link_to "Ajouter produits", new_product_path, class: "btn btn-primary h-25" %>
+      <% end %>
+      <% if policy(@product).edit? %>
+        <%= link_to 'Modifier', edit_product_path(@product), class:"btn btn-primary" %>
+      <% end %>
+      <% if policy(@product).destroy? %>
+        <%= link_to 'Suprimer', product_path, method: :delete, class:"btn btn-primary", data: {confirm: "sure?"} %>
+      <% end %>
+      <% if policy(Product).create? %>
+        <%= link_to "Retour à Tous les produits", products_path, class: "btn btn-primary"  %>
+      <% end %>
+    </div>
