@@ -13,9 +13,9 @@
       <%= f.input :city %>
       <%= f.input :price %>
       <%= f.input :stock %>
-      <%= f.input :status %>
+      <%= f.input :status, label: 'Would you like to make this property immediately available?' %>
       <%= f.input :photo, as: :file %>
-      <%= f.submit "Modifier produits", class: "btn btn-outline-primary" %>
+      <%= f.submit "Modifier produits", class: "btn btn-outline-success" %>
     <% end %>
   </div>
 </div>

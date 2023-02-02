@@ -25,9 +25,9 @@ class BookingsController < ApplicationController
   end
 
   def index
-    #@bookings = Booking.all
-    @bookings = policy_scope(Booking)
-    @my_bookings = policy_scope(Booking)
+    @bookings = Booking.all
+   # @bookings = policy_scope(Booking)
+    # @my_bookings = policy_scope(Booking)
     @my_bookings = Booking.where(user_id: current_user.id)
     @my_products_booked = current_user.products.map(&:bookings).flatten
     #@bookings = current_user.products.map(&:bookings).flatten.select { |b| b.status == "pending" }
@@ -39,7 +39,7 @@ class BookingsController < ApplicationController
   end
 
   def show
-    authorize @booking
+    # authorize @booking
   end
 
   def create
@@ -48,7 +48,7 @@ class BookingsController < ApplicationController
     @booking.product_id = @product.id
     @booking.total_price = total_price(@booking, @product)
   # @booking.total_price = ((@booking.end_date - @booking.start_date).to_i) * @product.price
-    authorize @booking
+    # authorize @booking
     if @booking.save
       redirect_to booking_path(@booking)
     else
@@ -57,7 +57,7 @@ class BookingsController < ApplicationController
   end
 
   def edit
-    authorize @booking
+    # authorize @booking
   end
 
   def update
@@ -67,7 +67,7 @@ class BookingsController < ApplicationController
     @booking.total_price = total_price(@booking, @product)
 
    # @booking.total_price = ((@booking.end_date - @booking.start_date).to_i) * @product.price
-    authorize @booking
+    # authorize @booking
     if @booking.save
       redirect_to booking_path(@product, @booking)
     else
@@ -77,7 +77,7 @@ class BookingsController < ApplicationController
 
   def destroy
     @booking = Booking.find(params[:id])
-    authorize @booking
+    # authorize @booking
     @booking.destroy
     redirect_to bookings_path
   end
@@ -103,5 +103,9 @@ class BookingsController < ApplicationController
 
   def booking_params
     params.require(:booking).permit(:start_date, :end_date, :status, :total_price)
+  end
+
+  def skip_pundit?
+    true
   end
 end

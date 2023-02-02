@@ -1,5 +1,5 @@
 .banner {
-
+  background-size: auto;
   background-color: rgba(0, 0, 0, 0.5);
   background-blend-mode:color;
   color: rgb(255, 255, 255);
@@ -7,6 +7,7 @@
   text-align: center;
   align-items: center;
   justify-content: center;
+  opacity: 0.08;
 }
 
 .banner h1 {

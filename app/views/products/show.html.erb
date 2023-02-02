@@ -4,86 +4,8 @@
   </div>
 </div>
 
-<div class="">
+<p style="color: green"><%= notice %></p>
 
-  <% if @product.photo.attached? %>
-    <%= cl_image_tag @product.photo.key, class: 'show-image' %>
-    <% else %>
-    <%= image_tag("unknown.jpg", class:"show-image") %>
-  <% end %>
-</div>
+<%= render @product %>
 
-<div class="container margin-top-negative">
-  <div class="row">
-    <div class="col-8">
-      <div class="product-show-card">
-        <h1><%= @product.title %></h1>
-        <p class="product-show-address"><%= @product.address %></p>
-      </div>
-      <div class="product-show-card">
-          <p><strong>Description: </strong><%= @product.description %></p>
-          <p><strong>Prix ​​par jour: </strong><%= @product.price %> €</p>
-          <% if @product.status? %>
-            <p class="card-text text-success"><strong>Disponible</strong></p><br>
-          <% else %>
-            <p class="card-text"><strong>Indisponible</strong></p><br>
-          <% end %>
-          <%= link_to "Louer", "/products/#{params[:id]}/bookings/new", class: "btn btn-info" %>
 
-      </div>
-      <div class="col-4">
-        <div class="product-show-card">
-          <h5>Book this place!</h5>
-
-          <form action="">
-            <div class="input-group">
-              <span class="input-group-text" id="start-date-label">From:</span>
-              <input type="text" class="form-control" placeholder="30/01/2023" aria-label="start-date" aria-describedby="start-date-label">
-            </div>
-            <div class="input-group mt-2">
-              <span class="input-group-text" id="end-date-label">To:</span>
-              <input type="text" class="form-control" placeholder="01/02/2023" aria-label="end-date" aria-describedby="start-date-label">
-            </div>
-            <input type="submit" value="Book" class="btn btn-success mt-2" style="width: 100%">
-        </form>
-      </div>
-      <div class="product-show-card">
-        <h3>Details</h3>
-        <div class="flex">
-          <div class="flex">
-            <%= @product.stock %> piéces
-          </div>
-          <div class="flex ms-3">
-            <%= @product.price %>€
-          </div>
-        </div>
-      </div>
-      <div class="flat-show-card">
-        <div class="flex-align">
-          <h6 class="no-mb">Share</h6>
-
-          <div class="flex">
-            <i class="fa-brands fa-facebook-square me-2"></i>
-            <i class="fa-brands fa-twitter-square me-2"></i>
-            <i class="fa-brands fa-pinterest-square me-2"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<hr>
-<div class="d-flex flex-row product-options">
-      <% if policy(Product).create? %>
-        <%= link_to "Ajouter produits", new_product_path, class: "btn btn-primary h-25" %>
-      <% end %>
-      <% if policy(@product).edit? %>
-        <%= link_to 'Modifier', edit_product_path(@product), class:"btn btn-primary" %>
-      <% end %>
-      <% if policy(@product).destroy? %>
-        <%= link_to 'Suprimer', product_path, method: :delete, class:"btn btn-primary", data: {confirm: "sure?"} %>
-      <% end %>
-      <% if policy(Product).create? %>
-        <%= link_to "Retour à Tous les produits", products_path, class: "btn btn-primary"  %>
-      <% end %>
-    </div>

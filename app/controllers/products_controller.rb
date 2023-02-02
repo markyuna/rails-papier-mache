@@ -5,8 +5,8 @@ class ProductsController < ApplicationController
   before_action :set_product, only: %i[show edit update destroy reviews]
 
   def index
-    #@products = Product.all
-    @products = policy_scope(Product)
+    @products = Product.all
+    #@products = policy_scope(Product)
     @markers = @products.geocoded.map do |product|
       {
         lng: product.longitude,
@@ -19,14 +19,14 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
-    authorize @product
+    # authorize @product
   end
 
   def create
     @product = Product.new(product_params)
     @product.user_id = @user.id
     @product = current_user.products.build(product_params)
-    authorize @product
+    # authorize @product
     if @product.save
      flash[:notice] = "Product successfully listed for sale!"
      redirect_to @product
@@ -44,7 +44,7 @@ class ProductsController < ApplicationController
 
   def edit
     Product.find(params[:id])
-    authorize @product
+    # authorize @product
   end
 
   def update
@@ -63,15 +63,15 @@ class ProductsController < ApplicationController
   end
 
   def destroy
+  #  authorize @products
     @product.destroy
-    redirect_to my_products_path, status: :see_other
-    authorize @products
+    redirect_to my_products_url, notice: "Restaurant was successfully destroyed."
   end
 
   def my_products
     @products = current_user.products
     @bookings = @products.map {|p| p.bookings}.flatten
-    authorize @products
+    # authorize @products
   end
 
   def search
@@ -124,7 +124,7 @@ class ProductsController < ApplicationController
       redirect_to error_path
     else
       @product = Product.find(params[:id])
-      authorize @product
+      # authorize @product
     end
   end
 
@@ -134,5 +134,9 @@ class ProductsController < ApplicationController
 
   def database_search
     @markers = Product.all
+  end
+
+  def skip_pundit?
+    true
   end
 end

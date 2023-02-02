@@ -1,7 +1,7 @@
 class ProductPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.all
+      user.admin? ? scope.all : scope.where(user: user)
     end
   end
 
@@ -22,7 +22,7 @@ class ProductPolicy < ApplicationPolicy
   end
 
   def update?
-    record.user == user
+    record.user == user 
   end
 
   def destroy?
