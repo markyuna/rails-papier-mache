@@ -1,14 +1,9 @@
-<section class="banner mw-100">
-  <div class="banner-content">
-    <%= image_tag 'homme.jpg', class:'mw-100' %>
-    <h1>Construire à l'infini</h1>
-    <p><span data-controller="typed-js"></span></p>
-    <%= link_to "Découvrir",  products_path, class: "banner-button" %>
-  </div>
-</section>
-
-<hr>
-    <h3>Découvrez nos emplacements les mieux notés!</h3>
+<div class="container d-flex align-items-center justify-content-center vh-100">
+    <div class="banner">
+      <h1>Sculptures en Carton</h1>
+      <p><span data-controller="typed-js"></span></p>
+      <%= link_to "Voir les oeuvres",  products_path, class: "banner-button" %>
+    </div>
 
    <div id="carouselExampleIndicators" class="carousel slide shadow-sm border" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -18,7 +13,7 @@
       <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
       <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
     </ol>
-   
+
     <button class="carousel-control-prev" type="button" data-target="#carouselExampleIndicators" data-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true" style="color:black;"></span>
       <span class="sr-only">Précédent</span>
@@ -27,3 +22,4 @@
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="sr-only">Suivant</span>
     </button>
+</div>

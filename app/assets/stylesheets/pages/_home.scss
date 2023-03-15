@@ -1,4 +1,10 @@
 // Specific CSS for your home-page
+body {
+  // background-image: image-url('background.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+}
+
 h1, h3 {
   margin: 32px 0 24px 0;
   text-align: center;

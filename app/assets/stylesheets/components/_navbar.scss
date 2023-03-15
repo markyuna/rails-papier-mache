@@ -1,10 +1,44 @@
 .navbar {
-  justify-content: space-between;
-  padding: 20px;
-  padding-right: 50px;
-  margin-bottom: 20px;
+  background: #222328;
 }
 
-.navbar .navbar-collapse {
+.navbar-lewagon {
+  justify-content: space-between;
+  background-color: transparent;
+}
+
+.navbar-lewagon .navbar-collapse {
   flex-grow: 0;
 }
+
+.navbar-lewagon .navbar-brand img {
+  width: 30px;
+}
+
+// @media (min-width: 992px) {
+
+//   .navbar-expand-lg {
+//     flex-flow: row nowrap;
+//     justify-content: flex-start;
+//   }
+// }
+// @media (min-width: 992px) {
+//   .navbar-expand-lg>.container, .navbar-expand-lg>.container-fluid {
+//     flex-wrap: nowrap;
+//   }
+// }
+
+// .navbar>.container, .navbar>.container-fluid {
+//     display: flex;
+//     flex-wrap: wrap;
+//     align-items: center;
+//     justify-content: space-between;
+// }
+
+
+
+// .navbar-collapse {
+//   flex-basis: 100%;
+//   flex-grow: 1;
+//   align-items: center;
+// }

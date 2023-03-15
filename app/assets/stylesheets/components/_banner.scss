@@ -1,28 +1,23 @@
 .banner {
-  background-size: auto;
-  background-color: rgba(0, 0, 0, 0.5);
-  background-blend-mode:color;
-  color: rgb(255, 255, 255);
-  display: flex;
+  background-color: rgba(46, 40, 40, 0.5);
   text-align: center;
   align-items: center;
   justify-content: center;
-  opacity: 0.08;
 }
 
 .banner h1 {
   font-size: 120px;
   font-family: helvetica;
   font-weight: bolder;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+  // text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
   color: #D8DDF8;
 }
 
-.banner p {
-  font-size: 24px;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
-  margin-bottom: 40px;
-}
+// .banner p {
+//   font-size: 24px;
+//   text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+//   margin-bottom: 40px;
+// }
 
 .banner-button {
   color: black;
